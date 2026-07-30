@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Cyber Security - Caesar Cipher Tool</title>
+  <style>
+    /* Dark Theme Cyber Security Look */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 15px;
+    }
+
+    .card {
+      background-color: #1e293b;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid #334155;
+    }
+
+    h2 {
+      text-align: center;
+      color: #38bdf8;
+      margin-top: 0;
+    }
+
+    label {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-top: 10px;
+      display: block;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #475569;
+      background-color: #0f172a;
+      color: #ffffff;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .encrypt-btn {
+      background-color: #22c55e;
+      color: white;
+    }
+
+    .decrypt-btn {
+      background-color: #ef4444;
+      color: white;
+    }
+
+    .result-box {
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #0f172a;
+      border-radius: 6px;
+      border-left: 4px solid #38bdf8;
+    }
+
+    .result-box h4 {
+      margin: 0 0 5px 0;
+      color: #38bdf8;
+    }
+
+    p#resultText {
+      margin: 0;
+      word-break: break-all;
+      font-size: 16px;
+      color: #f1f5f9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>🔒SHUBHAM Secret Message Tool</h2>
+
+    <label for="message">Message Type Karein:</label>
+    <textarea id="message" rows="3" placeholder="Yahan apna text likhein..."></textarea>
+
+    <label for="shiftKey">Secret Key Number (e.g. 3):</label>
+    <input type="number" id="shiftKey" value="3">
+
+    <div class="btn-group">
+      <button class="encrypt-btn" onclick="handleEncrypt()">Encrypt 🔐</button>
+      <button class="decrypt-btn" onclick="handleDecrypt()">Decrypt 🔓</button>
+    </div>
+
+    <div class="result-box">
+      <h4>Result:</h4>
+      <p id="resultText">Aapka output yahan dikhega...</p>
+    </div>
+  </div>
+
+  <script>
+    // Python wale logic ko JavaScript mein convert kiya gaya hai
+    function cipherLogic(text, shift) {
+      let result = "";
+      shift = Number(shift); // Ensure shift is a number
+
+      for (let i = 0; i < text.length; i++) {
+        let char = text[i];
+        let code = text.charCodeAt(i);
+
+        // Capital Letters (A-Z)
+        if (code >= 65 && code <= 90) {
+          let shifted = ((code - 65 + shift) % 26 + 26) % 26 + 65;
+          result += String.fromCharCode(shifted);
+        }
+        // Small Letters (a-z)
+        else if (code >= 97 && code <= 122) {
+          let shifted = ((code - 97 + shift) % 26 + 26) % 26 + 97;
+          result += String.fromCharCode(shifted);
+        }
+        // Numbers/Spaces/Symbols
+        else {
+          result += char;
+        }
+      }
+      return result;
+    }
+
+    // Encrypt Button Click handler
+    function handleEncrypt() {
+      let text = document.getElementById("message").value;
+      let key = document.getElementById("shiftKey").value;
+      if (!text) return alert("Kripya pehle message type karein!");
+      
+      let secret = cipherLogic(text, key);
+      document.getElementById("resultText").innerText = secret;
+    }
+
+    // Decrypt Button Click handler
+    function handleDecrypt() {
+      let text = document.getElementById("message").value;
+      let key = document.getElementById("shiftKey").value;
+      if (!text) return alert("Kripya pehle message type karein!");
+
+      let original = cipherLogic(text, -key);
+      document.getElementById("resultText").innerText = original;
+    }
+  </script>
+
+</body>
+</html>
