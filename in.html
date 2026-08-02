@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Friendship Day! 🤝✨</title>
+  <!-- Confetti Fireworks Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f172a, #1e1b4b, #311042);
+      color: #ffffff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 30px 20px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .top-header {
+      font-size: 18px;
+      font-weight: bold;
+      color: #38bdf8;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+    .icon {
+      font-size: 55px;
+      margin-bottom: 10px;
+      animation: bounce 1.5s infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+
+    label {
+      display: block;
+      font-size: 15px;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 2px solid #475569;
+      background: #0f172a;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #ec4899;
+      box-shadow: 0 0 12px rgba(236, 72, 153, 0.5);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(45deg, #ec4899, #8b5cf6);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    /* Secret Wish Box (Initially Hidden) */
+    #wishResult {
+      display: none;
+      margin-top: 25px;
+      animation: fadeIn 0.8s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .wish-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 20px;
+      border: 1px dashed #ec4899;
+    }
+
+    .msg-bhai {
+      font-size: 18px;
+      color: #fbbf24;
+      font-weight: bold;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .msg-name {
+      font-size: 22px;
+      color: #4ade80;
+      font-weight: 800;
+      text-transform: capitalize;
+    }
+
+    .error-msg {
+      color: #f87171;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="icon">🤝❤️</div>
+    <!-- Python Line 1 -->
+    <div class="top-header">Happy Friendship Day My Dear Friend!</div>
+
+    <!-- Python Line 2: Input Section -->
+    <div id="inputForm">
+      <label for="userName">ENTER YOUR NAME:</label>
+      <input type="text" id="userName" placeholder="Apna naam yahan likho...">
+      <button onclick="showWish()">Submit 🎉</button>
+      <div id="error" class="error-msg"></div>
+    </div>
+
+    <!-- Output Section -->
+    <div id="wishResult">
+      <div class="wish-box">
+        <!-- Python Line 3 -->
+        <div class="msg-bhai">"Mere bhai jese dosto ko friendship day ki khub sari badhaiya!"</div>
+        <hr style="border: 0; height: 1px; background: rgba(255,255,255,0.1); margin: 15px 0;">
+        <!-- Python Line 4 -->
+        <div class="msg-name" id="finalNameWish"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showWish() {
+      let nameInput = document.getElementById("userName").value.trim();
+      let errorDiv = document.getElementById("error");
+
+      if (nameInput !== "") {
+        errorDiv.innerText = "";
+        
+        // Form hide and Wish show
+        document.getElementById("inputForm").style.display = "none";
+        
+        // Set dynamic formatted string (f-string Python replica)
+        document.getElementById("finalNameWish").innerText = "Happy friendship day dear " + nameInput + "! 🥳";
+        document.getElementById("wishResult").style.display = "block";
+
+        // Confetti Fireworks Celebration
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+      } else {
+        errorDiv.innerText = "Please enter your name first!";
+      }
+    }
+  </script>
+
+</body>
+</html>
